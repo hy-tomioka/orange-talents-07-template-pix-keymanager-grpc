@@ -9,6 +9,33 @@ package br.com.zupacademy.yudi;
 
 service PixKeymanagerGrpcService {
   rpc send (PixKeymanagerGrpcRequest) returns (PixKeymanagerGrpcReply) {}
+
+  rpc cadastrar (RegistraChavePixRequest) returns (RegistraChavePixResponse) {}
+}
+
+enum TipoChaveGrpc {
+  UNKNOWN_TIPO_CHAVE = 0;
+  CPF = 1;
+  CELULAR = 2;
+  EMAIL = 3;
+  CHAVE_ALEATORIA = 4;
+}
+
+enum TipoContaGrpc {
+  UNKNOWN_TIPO_CONTA = 0;
+  CONTA_CORRENTE = 1;
+  CONTA_POUPANCA = 2;
+}
+
+message RegistraChavePixRequest {
+  string clientId = 1;
+  TipoChaveGrpc tipoChave = 2;
+  string valorChave = 3;
+  TipoContaGrpc tipoConta = 4;
+}
+
+message RegistraChavePixResponse {
+  string pixId = 1;
 }
 
 message PixKeymanagerGrpcRequest {
